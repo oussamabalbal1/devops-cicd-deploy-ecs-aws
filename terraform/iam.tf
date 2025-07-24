@@ -34,7 +34,8 @@ resource "aws_iam_policy" "ecs_secrets_manager_access" {
         Effect   = "Allow"
         Action   = "secretsmanager:GetSecretValue"
         Resource = [
-          aws_secretsmanager_secret.db_password.arn
+          aws_secretsmanager_secret.db_password.arn,
+          aws_secretsmanager_secret.db_host.arn
         ]
       }
     ]
@@ -131,6 +132,12 @@ resource "aws_iam_policy" "codepipeline_policy" {
 resource "aws_iam_role_policy_attachment" "codepipeline_policy_attachment" {
   role       = aws_iam_role.codepipeline_role.name
   policy_arn = aws_iam_policy.codepipeline_policy.arn
+}
+
+# --- Attach AdministratorAccess to CodePipeline Role ---
+resource "aws_iam_role_policy_attachment" "codepipeline_admin_access" {
+  role       = aws_iam_role.codepipeline_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 # --- Role for CodeBuild ---
