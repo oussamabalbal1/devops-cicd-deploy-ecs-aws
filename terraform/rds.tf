@@ -24,4 +24,7 @@ resource "aws_db_instance" "main" {
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   skip_final_snapshot    = true
   publicly_accessible    = false
+
+  # Set to true to create a standby instance in a different AZ
+  multi_az               = true
 }

@@ -19,17 +19,8 @@ The architecture is designed for high availability and security. It isolates the
 
 ### **Architecture Diagram**
 
-*(You can create a diagram using a tool like diagrams.net or Cloudcraft and embed it here.)*
+![Architecture Diagram](./images/AWS-PROJECT-2.png)
 
-```
-[Client] -> [Internet] -> [Route 53] -> [ACM Certificate] -> [Application Load Balancer (Public Subnets)]
-                                                                    |
-                                                                    v
-                                    [ECS Fargate Tasks (Private Subnets)] <-> [RDS PostgreSQL (Private Subnets)]
-                                                                    ^
-                                                                    |
-[GitHub] --(Webhook)--> [CodePipeline] --(Build)--> [CodeBuild] --(Push Image)--> [ECR] --(Deploy)--> [ECS Service]
-```
 
 * **Workflow:** A developer pushes code to the specified branch in the GitHub repository. A webhook triggers the AWS CodePipeline. CodeBuild checks out the source code, builds the Docker image, and pushes it to the Amazon ECR repository. Finally, CodePipeline triggers a deployment action, causing Amazon ECS to pull the new image from ECR and deploy it as a new task in the Fargate cluster. The Application Load Balancer then directs traffic to the healthy new task.
 

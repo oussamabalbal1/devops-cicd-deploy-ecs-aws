@@ -14,3 +14,5 @@ resource "aws_ecr_repository" "main" {
     Name = "${var.project_name}-repo"
   }
 }
+
+
