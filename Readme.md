@@ -144,6 +144,57 @@ After a successful deployment, the application URL will be available in the Terr
 * **Logs:** All logs (stdout/stderr) from your NestJS application running in ECS are streamed to a **CloudWatch Log Group** named `/ecs/${var.project_name}`. This is the primary place to debug application issues.
 
 ---
+## **✅ 5. Infrastructure Validation**
+After a successful terraform apply, the following visual evidence confirms that the infrastructure is provisioned correctly and the application is fully functional.
+
+
+### **AWS Service Confirmation**
+Screenshots from the AWS Management Console verify that the core services were created and are in the correct state:
+
+**VPC:**  Shows the custom VPC with its public and private subnets, route tables, and gateways, confirming the network foundation is in place.
+
+![VPC](./images/vpc.PNG)
+
+**ECS & ECR:** Demonstrates a running ECS Fargate task and the application's Docker image successfully pushed to the ECR repository.
+
+![ECS](./images/ecs.PNG)
+![ECR](./images/ecr.PNG)
+
+ALB & Route 53: Confirms that the Application Load Balancer (ALB) is active and correctly routing traffic from the custom domain managed by Route 53.
+
+![ALB](./images/alb.PNG)
+![ROUTE53](./images/route53.PNG)
+
+**RDS:** Verifies that the RDS PostgreSQL instance is Available and running securely in a private subnet.
+
+![RDS](./images/rds.PNG)
+
+**Cognito:** Shows the configured Cognito User Pool and App Client, ready to handle user authentication.
+
+![COGNITO](./images/cognito.PNG)
+
+**CodePipeline:** Displays a Succeeded status for the CI/CD pipeline, indicating that the source, build, and deploy stages completed without errors after the initial deployment.
+
+![CODE PIPELINE](./images/codepipeline.PNG)
+
+
+
+## **End-to-End Application Flow**
+The following GIF demonstrates a complete, successful user interaction, proving that all components are integrated and working together seamlessly:
+
+The flow shown in the recording confirms the following steps:
+
+**Domain Access:** The application is successfully reached via the custom URL configured in Route 53.
+
+**Authentication Trigger:** The ALB correctly intercepts the request and redirects to the Amazon Cognito hosted UI for user authentication.
+
+**Application Load:** After a successful sign-in, the user is redirected back to the NestJS application, which loads properly.
+
+**Database Interaction:** The user performs an action (creating a new record), which sends a request from the application running in ECS to the database.
+
+**Data Persistence:** The new record is successfully saved to the RDS PostgreSQL database, confirming that the ECS task has the correct permissions and connectivity to write to the database.
+
+![CODE PIPELINE](./images/test.gif)
 
 ## **🛡️ 6. Security**
 
