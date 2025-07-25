@@ -75,10 +75,13 @@ resource "aws_ecs_service" "main" {
   name            = "${var.project_name}-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.main.arn
-  desired_count   = 4
+  desired_count   = 2
   launch_type     = "FARGATE"
 
-  depends_on = [aws_lb_listener.https]
+  depends_on = [
+    aws_lb_listener.https,
+    aws_db_instance.main # Ensures RDS is 'available' before creating the service initially
+    ]
 
   network_configuration {
     subnets         = [for subnet in aws_subnet.private : subnet.id]
