@@ -1,10 +1,10 @@
-# 🚀 Production-Ready NestJS Application on AWS with CI/CD
+#  Production-Ready NestJS Application on AWS with CI/CD
 
 > A complete, production-grade infrastructure for deploying and managing a NestJS application on AWS. This project uses ECS Fargate for container orchestration, RDS for a managed database, and a full CI/CD pipeline with AWS CodePipeline for automated builds and deployments from GitHub.
 
 ---
 
-## **📝 1. Project Overview**
+## ** 1. Project Overview**
 
 This project provides a secure, scalable, and automated foundation for running a containerized NestJS application on AWS. The entire infrastructure is defined as code using Terraform, enabling consistent and repeatable deployments across different environments. It includes everything from the network foundation to a complete CI/CD pipeline that triggers on a `git push`.
 
@@ -13,7 +13,7 @@ This project provides a secure, scalable, and automated foundation for running a
 
 ---
 
-## **🗺️ 2. Architecture**
+## ** 2. Architecture**
 
 The architecture is designed for high availability and security. It isolates the application and database in private subnets, exposing the application only through a public-facing Application Load Balancer. The CI/CD pipeline automates the process of building the application's Docker image and deploying it to the ECS cluster.
 
@@ -114,7 +114,7 @@ There are no manual setup steps required in the AWS console. All resources are p
 
 ---
 
-## **⚙️ 4. Usage & Operations**
+## ** 4. Usage & Operations**
 
 After a successful deployment, the application URL will be available in the Terraform outputs. The CI/CD pipeline is fully active.
 
@@ -144,7 +144,7 @@ After a successful deployment, the application URL will be available in the Terr
 * **Logs:** All logs (stdout/stderr) from your NestJS application running in ECS are streamed to a **CloudWatch Log Group** named `/ecs/${var.project_name}`. This is the primary place to debug application issues.
 
 ---
-## **✅ 5. Infrastructure Validation**
+## ** 5. Infrastructure Validation**
 After a successful terraform apply, the following visual evidence confirms that the infrastructure is provisioned correctly and the application is fully functional.
 
 
@@ -196,7 +196,7 @@ The flow shown in the recording confirms the following steps:
 
 ![CODE PIPELINE](./images/test.gif)
 
-## **🛡️ 6. Security**
+## ** 6. Security**
 
 Security is a core component of this architecture, with multiple layers of protection.
 
@@ -213,7 +213,7 @@ Security is a core component of this architecture, with multiple layers of prote
 
 ---
 
-## **💰 7. Cost**
+## ** 7. Cost**
 
 * **Cost Estimation:** This architecture is designed for production and is **not fully covered by the AWS Free Tier**. Key services that will incur costs include:
     * **NAT Gateway:** Billed per hour and for data processed.
